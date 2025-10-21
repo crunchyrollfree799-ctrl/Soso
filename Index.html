@@ -1,0 +1,140 @@
+<!doctype html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sofia Luiza — Meu Amor Eterno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#ffd7e6;
+      --bg2:#ffe9f2;
+      --accent:#ff4d8b;
+      --muted:#6b6b6b;
+      --glass: rgba(255,255,255,0.55);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Segoe UI,Arial}
+    body{
+      background: radial-gradient(circle at 10% 10%,var(--bg1),var(--bg2));
+      overflow-x:hidden;color:#2b2b2b;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    header{
+      padding:3rem 1.25rem 6rem;position:relative;overflow:visible;text-align:center
+    }
+    .card{
+      max-width:1100px;margin:0 auto;background:linear-gradient(135deg, rgba(255,255,255,0.75), rgba(255,255,255,0.65));backdrop-filter: blur(6px);border-radius:20px;padding:2rem;box-shadow:0 10px 30px rgba(0,0,0,0.08)
+    }
+    h1{font-family:'Dancing Script',cursive;font-size:3.4rem;margin:0;color:var(--accent);letter-spacing:1px}
+    p.lead{margin:0.4rem 0 1.2rem;font-size:1.05rem;color:var(--muted)}
+    .hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .heart{position:absolute;left:50%;top:50%;width:28px;height:28px;transform:translate(-50%,-50%) scale(1);opacity:0.9;animation:floatUp linear infinite;will-change:transform,opacity}
+    .heart svg{width:100%;height:100%;display:block}
+    @keyframes floatUp{0%{transform:translate(var(--x,0),var(--y,0)) scale(var(--s,1));opacity:0}10%{opacity:1}100%{transform:translate(calc(var(--x,0) + 0px),calc(var(--y,0) - 120vh)) scale(calc(var(--s,1) * 0.9));opacity:0}}
+    .row{display:flex;gap:1rem;align-items:stretch;flex-wrap:wrap}
+    .col{flex:1;min-width:260px}
+    .panel{background:var(--glass);border-radius:14px;padding:1.25rem}
+    .quotes{min-height:140px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+    .quote{font-size:1.1rem;text-align:center;font-style:italic;color:#4b2b3b}
+    .author{margin-top:0.6rem;font-weight:700;color:var(--accent)}
+    .gallery{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:1rem}
+    .gallery img{width:120px;height:160px;object-fit:cover;border-radius:12px;box-shadow:0 4px 12px rgba(255,77,139,0.4);transition:transform 0.4s ease, box-shadow 0.4s ease}
+    .gallery img:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(255,77,139,0.7)}
+    footer{margin-top:1.25rem;text-align:center;color:var(--muted);font-size:0.9rem}
+    @media (max-width:600px){h1{font-size:2.4rem}header{padding-bottom:4rem}}
+    .btn{display:inline-block;padding:0.6rem 1rem;border-radius:999px;background:var(--accent);color:white;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(255,77,139,0.18);transition:transform .18s}
+    .btn:active{transform:scale(.97)}
+    .sparkle{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(255,77,139,0.9);animation:blink 2.2s infinite}
+    @keyframes blink{0%,60%{opacity:0}65%{opacity:1}100%{opacity:0}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="card">
+      <h1>Sofia Luiza 💖</h1>
+      <p class="lead">Cada batida do meu coração é um lembrete do quanto eu te amo, Sofia ❤️</p>
+      <div class="row">
+        <div class="col panel">
+          <div class="quotes" id="quotesContainer">
+            <!-- Frases e fotos aparecerão aqui -->
+          </div>
+        </div>
+      </div>
+      <footer>
+        Feito com todo meu amor para você, Sofia Luiza 💞
+      </footer>
+    </div>
+    <div class="hearts" id="hearts" aria-hidden></div>
+  </header>  <script>
+    const frases = [
+      'Você é o amor da minha vida, Sofia.',
+      'Tudo em mim é você.',
+      'Cada batida do meu coração sussurra seu nome.',
+      'Meu amor por você não tem fim.',
+      'Sofia, você é meu hoje, meu amanhã e meu sempre.'
+    ];
+
+    const fotos = [
+      'https://i.ibb.co/DgtjKW5N/IMG-20251021-112213-297.jpg',
+      'https://i.ibb.co/qMtvCVCj/IMG-20251021-112215-587.jpg',
+      'https://i.ibb.co/9kKFKC25/IMG-20251021-112219-337.jpg',
+      'https://i.ibb.co/zDVjFyv/IMG-20251021-112226-423.jpg',
+      'https://i.ibb.co/ymSw5kGY/IMG-20251021-112229-742.jpg'
+    ];
+
+    const container = document.getElementById('quotesContainer');
+
+    function shuffle(array){
+      for(let i=array.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [array[i],array[j]]=[array[j],array[i]];
+      }
+      return array;
+    }
+
+    const fotosShuffled = shuffle([...fotos]);
+    for(let i=0;i<frases.length;i++){
+      const qDiv = document.createElement('div');
+      qDiv.style.marginBottom='15px';
+
+      const p = document.createElement('div');
+      p.className='quote';
+      p.textContent='"'+frases[i]+'"';
+      qDiv.appendChild(p);
+
+      if(fotosShuffled[i]){
+        const img = document.createElement('img');
+        img.src = fotosShuffled[i];
+        img.alt='Sofia';
+        img.style.marginTop='8px';
+        qDiv.appendChild(img);
+      }
+      container.appendChild(qDiv);
+    }
+
+    const heartsContainer = document.getElementById('hearts');
+    function createHeart(){
+      const heart=document.createElement('div');
+      heart.className='heart';
+      const s=0.6+Math.random()*1.1;
+      const left=Math.random()*100;
+      const startY=100+Math.random()*20;
+      heart.style.setProperty('--s',s);
+      heart.style.setProperty('--x',left+'vw');
+      heart.style.setProperty('--y',startY+'vh');
+      heart.style.left=left+'vw';
+      heart.style.top=startY+'vh';
+      heart.style.animationDuration=(6+Math.random()*6)+'s';
+      heart.innerHTML='<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9-7.5C.6 10.45 3 6.5 6.5 6.5 8.3 6.5 9.6 7.4 12 9c2.4-1.6 3.7-2.5 5.5-2.5C21 6.5 23.4 10.45 21 13.5 19 16.65 12 21 12 21z" fill="#ff547b"/></svg>';
+      heartsContainer.appendChild(heart);
+      setTimeout(()=>heart.remove(),12000);
+    }
+    for(let i=0;i<8;i++){setTimeout(()=>createHeart(),i*450)}
+    setInterval(()=>createHeart(),900);
+  </script></body>
+</html>
